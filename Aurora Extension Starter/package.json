@@ -1,0 +1,70 @@
+{
+	"name": "aurora-starter-extension",
+	"displayName": "Aurora Starter Extension",
+	"description": "A starter template for all Aurora extensions.",
+	"version": "0.0.1",
+	"engines": {
+		"vscode": "^1.84.0"
+	},
+	"publisher": "Aurora Constellations",
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [],
+	"main": "./out/extension",
+	"type": "commonjs",
+	"scripts": {
+		"bundle": "sbt fastOptJS && vite build",
+		"compile": "vite build",
+		"watch": "vite build --watch",
+		"package": "vite build --mode production"
+	},
+	
+	"contributes": {
+		"viewsWelcome": [
+			{
+				"view": "auroraExtension.auroraWebview",
+				"contents": "This view is empty",
+				"when": "config.git.enabled && git.state == initialized && workbenchState == empty"
+			}
+		],
+		"viewsContainers": {
+			"activitybar": [
+			  {
+				"id": "aurora-extension",
+				"title": "Aurora",
+				"icon": "src/assets/patient.png"
+			  }
+			]
+		  },
+		"commands": [
+			{
+				"command": "auroraExtension.refreshPatients",
+				"title": "Refresh Patients",
+				"category": "Aurora"
+			  }			  
+		],
+
+		"views":{
+			"aurora-extension":[
+				{
+					"type":"tree",
+					"id": "auroraExtension.patients",
+					"name": "Patients",
+					"icon": "src/assets/patient.png"
+				},
+				{
+					"type":"tree",
+					"id": "auroraExtension.extra",
+					"name": "Extra"
+				}
+			]
+		}
+	},
+
+	"devDependencies": {
+		"@scala-js/vite-plugin-scalajs": "^1.0.0",
+		"@types/vscode": "^1.94.0",
+		"@types/vscode-webview": "^1.57.5"
+	}
+}
