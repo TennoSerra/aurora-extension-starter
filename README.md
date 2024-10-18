@@ -1,0 +1,1 @@
+# aurora-extension-starter
